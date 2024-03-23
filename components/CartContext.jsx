@@ -20,21 +20,22 @@ const cartReducer = (state, action) => {
       throw new Error("No case for that type");
   }
 };
-const storedItems = JSON.parse(localStorage.getItem("cart")) || [];
+// const storedItems = typeof window !== 'undefined' ? localStorage.getItem('cart') : []
+// const storedItems = JSON.parse(localStorage.getItem("cart")) || [];
 
 const initialState = {
-  items: [...storedItems],
+  items: [],
 };
 export const CartContext = createContext(initialState);
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
+  const storedItems = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("cart")) || [] : [];
+  const [state, dispatch] = useReducer(cartReducer, { items: storedItems });
+  // const [state, dispatch] = useReducer(cartReducer, initialState);
   useEffect(() => {
     if (state.items?.length > 0) {
-      if (typeof window !== 'undefined') {
-  
+      if (typeof window !== "undefined") {
         localStorage.setItem("cart", JSON.stringify(state.items));
       }
-      
     }
   }, [state.items]);
   const addToCart = (product) => {
@@ -50,7 +51,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (id) => {
     const pos = state.items.indexOf(id);
-     if (pos != -1) {
+    if (pos != -1) {
       var updatedCart = state.items.filter((value, index) => index !== pos);
     }
     dispatch({

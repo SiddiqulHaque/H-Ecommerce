@@ -50,7 +50,7 @@ const Header = () => {
               <a href={"/categories"}>Categories</a>
             </li>
             <li>
-              <a href={"/sigin"}>Account</a>
+              <a href={"/signin"}>Account</a>
             </li>
           </ul>
         </div>
