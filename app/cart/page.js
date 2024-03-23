@@ -102,7 +102,7 @@ const Page = () => {
               </thead>
               <tbody>
                 {products.map((product) => (
-                  <tr className="text-md">
+                  <tr key={product._id} className="text-md">
                     <td>
                       <div className=" p-[5px] flex justify-start items-center ">
                         <img

@@ -70,7 +70,7 @@ const Page = () => {
               </div>
               <div className="carousel carousel-center max-w-md p-4 space-x-4 rounded-box flex justify-center">
                 {product.images.map((i) => (
-                  <div
+                  <div key={i}
                     className="carousel-item cursor-pointer"
                     onClick={() => setactiveImages(i)}
                   >

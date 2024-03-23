@@ -112,7 +112,7 @@ const Page = () => {
                   <>
                     {categories?.length &&
                       categories.map((c, i) => (
-                        <li onClick={() => setShow(false)}>
+                        <li key={c._id} onClick={() => setShow(false)}>
                           <label
                             className=" cursor-pointer flex gap-2"
                             onChange={() => {
@@ -151,7 +151,7 @@ const Page = () => {
                     {/* {!!!fcateg?.length && */}
                     {fcateg?.length != 0 &&
                       fcateg?.map((c, i) => (
-                        <li>
+                        <li key={c._id}>
                           <label
                             className=" cursor-pointer flex gap-2"
                             onChange={() => {
@@ -233,7 +233,7 @@ const Page = () => {
             {categoryId.length == 0 ? (
               <>
                 {allproducts?.length ? (
-                  allproducts.map((product) => <ProductBox {...product} />)
+                  allproducts.map((product) => <ProductBox {...product} key={product._id} />)
                 ) : (
                   <>
                     <div className="flex flex-col gap-4 w-52">
@@ -254,7 +254,7 @@ const Page = () => {
             ) : (
               <>
                 {categProduct?.length ? (
-                  categProduct.map((product) => <ProductBox {...product} />)
+                  categProduct.map((product) => <ProductBox {...product} key={product._id} />)
                 ) : (
                   <>
                     <h1 className="text-xl font-semibold">

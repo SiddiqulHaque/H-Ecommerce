@@ -45,7 +45,7 @@ const Page = () => {
         {searchInput.length == 0 ? (
           <>
             {Products?.length ? (
-              Products.map((product) => <ProductBox {...product} />)
+              Products.map((product) => <ProductBox {...product} key={product._id} />)
             ) : (
               <>
                 <div className="flex flex-col gap-4 w-52">
@@ -72,7 +72,7 @@ const Page = () => {
         ) : (
           <>
             {fproduct?.length ? (
-              fproduct.map((product) => <ProductBox {...product} />)
+              fproduct.map((product) => <ProductBox {...product} key={product._id} />)
             ) : (
               <div>
                 <h1 className="text-2xl font-semibold">NO matching Product</h1>
