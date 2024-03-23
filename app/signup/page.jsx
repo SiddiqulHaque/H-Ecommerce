@@ -2,7 +2,7 @@
 import { auth } from "@/lib/firebase";
 import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-const page = () => {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setcPassword] = useState("");
@@ -67,4 +67,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

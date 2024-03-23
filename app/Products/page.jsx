@@ -3,7 +3,7 @@ import ProductBox from "@/components/ProductBox";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [Products, setProducts] = useState([]);
   const [searchInput, setsearchInput] = useState("");
   useEffect(() => {
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

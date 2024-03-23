@@ -4,7 +4,7 @@ import axios from "axios";
 import { usePathname } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const location = usePathname();
   const id = location.split("/")[2];
   const [product, setProduct] = useState(null);
@@ -87,4 +87,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

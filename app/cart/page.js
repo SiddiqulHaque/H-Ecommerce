@@ -7,7 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 
-const page = () => {
+const Page = () => {
   const { items, addToCart, removeFromCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -241,4 +241,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

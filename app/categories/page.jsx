@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const [categories, setCategories] = useState([]);
   const [categoryId, setcategoryId] = useState("");
   const [categProduct, setcategProduct] = useState([]);
@@ -271,4 +271,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
