@@ -9,12 +9,12 @@ const Header = () => {
   if (typeof window !== "undefined") {
     var theme = localStorage.getItem("isdark");
   }
-  const [isdark, setIsdark] = useState(JSON.parse(theme));
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("isdark", JSON.stringify(isdark));
-    }
-  }, [isdark]);
+  // const [isdark, setIsdark] = useState(JSON.parse(theme));
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     localStorage.setItem("isdark", JSON.stringify(isdark));
+  //   }
+  // }, [isdark]);
   const { items } = useContext(CartContext);
   return (
     <div className="navbar bg-base-100 sticky top-0 z-20 shadow-sm w-full ">
@@ -117,8 +117,8 @@ const Header = () => {
               type="checkbox"
               className="theme-controller"
               value="dracula"
-              checked={isdark}
-              onChange={() => setIsdark(!isdark)}
+              // checked={isdark}
+              // onChange={() => setIsdark(!isdark)}
             />
 
             {/* sun icon */}
