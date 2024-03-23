@@ -30,7 +30,11 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   useEffect(() => {
     if (state.items?.length > 0) {
-      localStorage.setItem("cart", JSON.stringify(state.items));
+      if (typeof window !== 'undefined') {
+  
+        localStorage.setItem("cart", JSON.stringify(state.items));
+      }
+      
     }
   }, [state.items]);
   const addToCart = (product) => {

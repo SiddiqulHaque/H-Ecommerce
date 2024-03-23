@@ -6,11 +6,14 @@ import Link from "next/link";
 
 const Header = () => {
   const [searchInput, setsearchInput] = useState("");
-  const [isdark, setIsdark] = useState(
-    JSON.parse(localStorage.getItem("isdark"))
-  );
+  if (typeof window !== "undefined") {
+    var theme = localStorage.getItem("isdark");
+  }
+  const [isdark, setIsdark] = useState(JSON.parse(theme));
   useEffect(() => {
-    localStorage.setItem("isdark", JSON.stringify(isdark));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("isdark", JSON.stringify(isdark));
+    }
   }, [isdark]);
   const { items } = useContext(CartContext);
   return (
