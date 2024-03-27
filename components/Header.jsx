@@ -6,11 +6,11 @@ import { useSession } from "next-auth/react";
 // import { cartContext } from "./cartContext";
 
 const Header = () => {
-  const { data: session } = useSession();
-  const [searchInput, setsearchInput] = useState("");
   if (typeof window == "undefined") {
     return;
   }
+  const { data: session } = useSession();
+  const [searchInput, setsearchInput] = useState("");
   let theme = localStorage.getItem("isdark");
   const [isdark, setIsdark] = useState(JSON.parse(theme));
   useEffect(() => {
