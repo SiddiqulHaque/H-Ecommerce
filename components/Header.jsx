@@ -2,19 +2,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 // import { cartContext } from "./cartContext";
 
 const Header = () => {
+  const { data: session } = useSession();
   const [searchInput, setsearchInput] = useState("");
-  if (typeof window !== "undefined") {
-    var theme = localStorage.getItem("isdark");
+  if (typeof window == "undefined") {
+    return;
   }
-  // const [isdark, setIsdark] = useState(JSON.parse(theme));
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     localStorage.setItem("isdark", JSON.stringify(isdark));
-  //   }
-  // }, [isdark]);
+  let theme = localStorage.getItem("isdark");
+  const [isdark, setIsdark] = useState(JSON.parse(theme));
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("isdark", JSON.stringify(isdark));
+    }
+  }, [isdark]);
   const { items } = useContext(CartContext);
   return (
     <div className="navbar bg-base-100 sticky top-0 z-20 shadow-sm w-full ">
@@ -67,27 +70,26 @@ const Header = () => {
         {/* <div
           className=" tooltip tooltip-left  pl-2 pr-1  "
           data-tip="Search Products"
-        >
-          <button className="btn btn-ghost btn-circle">
-            <Link href={"/Products"} className="indicator ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-            </Link>
-          </button>
-        </div> */}
-
+        > */}
+        <button className="btn btn-ghost btn-circle">
+          <Link href={"/Products"} className="indicator ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </Link>
+        </button>
+        {/* </div> */}
         <button className="btn btn-ghost btn-circle">
           <Link href={"/cart"} className="indicator">
             <svg
@@ -117,8 +119,8 @@ const Header = () => {
               type="checkbox"
               className="theme-controller"
               value="dracula"
-              // checked={isdark}
-              // onChange={() => setIsdark(!isdark)}
+              checked={isdark}
+              onChange={() => setIsdark(!isdark)}
             />
 
             {/* sun icon */}

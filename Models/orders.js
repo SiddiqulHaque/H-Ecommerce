@@ -1,8 +1,9 @@
-const { Schema, models, model } = require("mongoose");
+const { Schema, models, model, default: mongoose } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    line_items: Object,
+    items: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    orderBy: { type: mongoose.Schema.Types.ObjectId, ref: "Buyer" },
     name: String,
     email: String,
     city: String,

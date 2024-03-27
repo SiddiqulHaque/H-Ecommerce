@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 
@@ -54,8 +53,8 @@ const Featured = ({ featuredProd }) => {
           </div>
         </div>
       ) : (
-        <div className="flex gap-3 w-full justify-center items-center m-4">
-          <div className="skeleton w-full h-60 "></div>
+        <div className="flex gap-3 w-[full] justify-center items-center m-4">
+          <div className="skeleton w-[90%] h-60 "></div>
         </div>
       )}
     </>

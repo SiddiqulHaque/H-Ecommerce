@@ -7,14 +7,12 @@ const stripe = require("stripe")(process.env.stripe_SK);
 export const POST = async (req, res) => {
   try {
     await mongooseConnect();
-    // console.log(req.json())
     const { name, email, city, pCode, address, state, products } =
       await req.json();
     const productId = products?.split(",");
     const uniqueId = [...new Set(productId)];
     const productInfos = await Product.find({ _id: uniqueId });
     let line_items = [];
-    // console.log(uniqueId)
     for (const pid of uniqueId) {
       const pInfo = productInfos.find((p) => p._id.toString() === pid);
       const quantity = productId.filter((p) => p === pid)?.length || 0;

@@ -39,6 +39,7 @@ const Page = () => {
   const orderFormSubmit = async () => {
     // const stripe = await loadStripe(process.env.stripe_PK);
     const products = items.join(",");
+    console.log(products)
     const response = await axios.post("/api/checkout", {
       name,
       email,
