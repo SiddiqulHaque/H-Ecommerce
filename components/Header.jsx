@@ -14,9 +14,7 @@ const Header = () => {
   let theme = localStorage.getItem("isdark");
   const [isdark, setIsdark] = useState(JSON.parse(theme));
   useEffect(() => {
-    if (typeof window !== "undefined") {
       localStorage.setItem("isdark", JSON.stringify(isdark));
-    }
   }, [isdark]);
   const { items } = useContext(CartContext);
   return (
