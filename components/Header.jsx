@@ -6,15 +6,22 @@ import { useSession } from "next-auth/react";
 // import { cartContext } from "./cartContext";
 
 const Header = () => {
-  if (typeof window == "undefined") {
-    return;
-  }
   const { data: session } = useSession();
   const [searchInput, setsearchInput] = useState("");
-  let theme = localStorage.getItem("isdark");
-  const [isdark, setIsdark] = useState(JSON.parse(theme));
+  const [isdark, setIsdark] = useState(false); // Default value for isdark
+
+  // Load theme from localStorage only when the component mounts
   useEffect(() => {
-      localStorage.setItem("isdark", JSON.stringify(isdark));
+    // Check if localStorage is available
+    if (typeof window !== "undefined") {
+      const theme = localStorage.getItem("isdark");
+      if (theme) {
+        setIsdark(JSON.parse(theme));
+      }
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("isdark", JSON.stringify(isdark));
   }, [isdark]);
   const { items } = useContext(CartContext);
   return (
