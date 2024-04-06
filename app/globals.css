@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    @apply flex flex-col min-h-screen   ;
+body {
+    @apply flex flex-col min-h-screen;
+}
+
+.none {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: none;
 }

@@ -1,12 +1,9 @@
 "use client";
 import { CartContext } from "@/components/CartContext";
 import axios from "axios";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/lib/firebase";
-import { signOut } from "firebase/auth";
-
+import { useSession } from "next-auth/react";
 const Page = () => {
   const { items, addToCart, removeFromCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
@@ -18,11 +15,7 @@ const Page = () => {
   const [state, setState] = useState("");
   const [vis, setVis] = useState(false);
   const router = useRouter();
-  const [user] = useAuthState(auth);
-  // const session = sessionStorage.getItem("user");
-  // if (!user && !session) {
-  //   router.push("/signin");
-  // }
+  const { data: session } = useSession();
   useEffect(() => {
     const getCartProducts = async () => {
       await axios.post("/api/cartProducts", { ids: items }).then((response) => {
@@ -37,10 +30,12 @@ const Page = () => {
     total += price;
   }
   const orderFormSubmit = async () => {
-    // const stripe = await loadStripe(process.env.stripe_PK);
     const products = items.join(",");
-    console.log(products)
-    const response = await axios.post("/api/checkout", {
+    if (!session?.user) {
+      router.push("/signin");
+      return;
+    }
+    const response = await axios.post("/api/placeOrder", {
       name,
       email,
       city,
@@ -48,15 +43,13 @@ const Page = () => {
       address,
       state,
       products,
+      amount: total,
+      orderBy: session?.user.id,
     });
-    const url = response.data;
-    if (url) {
-      router.push(url);
-    }
+    router.push("/myorders");
   };
   return (
     <>
-      {/* <Header /> */}
       <h2 className="mx-14 my-2 text-2xl font-semibold      ">
         Welcome to Cart
       </h2>
@@ -222,17 +215,8 @@ const Page = () => {
                 className="btn btn-primary text-lg  "
                 onClick={orderFormSubmit}
               >
-                Continue to Payment
+                Place Order
               </button>
-              {/* <button
-                className="btn btn-primary text-lg  "
-                onClick={() => {
-                  signOut(auth);
-                  sessionStorage.removeItem("user");
-                }}
-              >
-                logout
-              </button> */}
             </div>
           </div>
         )}

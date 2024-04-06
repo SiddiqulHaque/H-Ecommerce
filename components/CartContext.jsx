@@ -28,14 +28,15 @@ const initialState = {
 };
 export const CartContext = createContext(initialState);
 export const CartProvider = ({ children }) => {
-  const storedItems = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("cart")) || [] : [];
+  const storedItems =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("cart")) || []
+      : [];
   const [state, dispatch] = useReducer(cartReducer, { items: storedItems });
   // const [state, dispatch] = useReducer(cartReducer, initialState);
   useEffect(() => {
     if (state.items?.length > 0) {
-      if (typeof window !== "undefined") {
-        localStorage.setItem("cart", JSON.stringify(state.items));
-      }
+      localStorage.setItem("cart", JSON.stringify(state.items));
     }
   }, [state.items]);
   const addToCart = (product) => {

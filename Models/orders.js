@@ -10,7 +10,11 @@ const orderSchema = new Schema(
     pCode: String,
     address: String,
     state: String,
-    paid: Boolean,
+    amount: Number,
+    paid: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

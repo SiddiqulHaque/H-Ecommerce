@@ -13,11 +13,9 @@ const Header = () => {
   // Load theme from localStorage only when the component mounts
   useEffect(() => {
     // Check if localStorage is available
-    if (typeof window !== "undefined") {
-      const theme = localStorage.getItem("isdark");
-      if (theme) {
-        setIsdark(JSON.parse(theme));
-      }
+    const theme = localStorage.getItem("isdark");
+    if (theme) {
+      setIsdark(JSON.parse(theme));
     }
   }, []);
   useEffect(() => {
@@ -76,7 +74,7 @@ const Header = () => {
           className=" tooltip tooltip-left  pl-2 pr-1  "
           data-tip="Search Products"
         > */}
-        <button className="btn btn-ghost btn-circle">
+        {/* <button className="btn btn-ghost btn-circle">
           <Link href={"/Products"} className="indicator ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +91,7 @@ const Header = () => {
               />
             </svg>
           </Link>
-        </button>
+        </button> */}
         {/* </div> */}
         <button className="btn btn-ghost btn-circle">
           <Link href={"/cart"} className="indicator">

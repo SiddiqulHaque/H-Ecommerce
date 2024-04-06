@@ -90,12 +90,12 @@ const Page = () => {
                 </svg>
               </label>
             </div>
-            <div className="drawer-side z-10 h-full w-full ">
+            <div className="drawer-side z-10  w-full shadow-md ">
               <div className="w-full flex justify-center py-2 px-1">
                 <input
                   type="text"
                   placeholder="Search Category"
-                  className="input focus:outline-none focus:border-neutral border  input-md   max-w-[16rem] shadow-sm"
+                  className="input focus:outline-none focus:border-neutral border  input-md   max-w-[16rem] shadow-md"
                   value={searchInput}
                   onChange={(e) => setsearchInput(e.target.value.toLowerCase())}
                 />
@@ -110,41 +110,59 @@ const Page = () => {
                 {/* Sidebar content here */}
                 {searchInput.length == 0 ? (
                   <>
-                    {categories?.length &&
-                      categories.map((c, i) => (
-                        <li key={c._id} onClick={() => setShow(false)}>
-                          <label
-                            className=" cursor-pointer flex gap-2"
-                            onChange={() => {
-                              setcategoryId((prev) => {
-                                if (prev === c._id) {
-                                  setSelected("");
-                                  return "";
-                                } else {
-                                  setSelected(c._id);
+                    {categories?.length ? (
+                      <>
+                        {categories.map((c, i) => (
+                          <li key={c._id} onClick={() => setShow(false)}>
+                            <label
+                              className=" cursor-pointer flex gap-2"
+                              onChange={() => {
+                                setcategoryId((prev) => {
+                                  if (prev === c._id) {
+                                    setSelected("");
+                                    return "";
+                                  } else {
+                                    setSelected(c._id);
 
-                                  return c._id;
-                                }
-                              });
-                              setcategName((prev) => {
-                                if (prev === c.name) {
-                                  return "";
-                                } else {
-                                  return c.name;
-                                }
-                              });
-                            }}
-                          >
-                            <input
-                              type="checkbox"
-                              checked={c._id === selected}
-                              onChange={() => onChange(c._id)}
-                              className="checkbox checkbox-secondary  w-4 h-4 "
-                            />
-                            <span className="label-text text-lg">{c.name}</span>
-                          </label>
-                        </li>
-                      ))}
+                                    return c._id;
+                                  }
+                                });
+                                setcategName((prev) => {
+                                  if (prev === c.name) {
+                                    return "";
+                                  } else {
+                                    return c.name;
+                                  }
+                                });
+                              }}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={c._id === selected}
+                                onChange={() => onChange(c._id)}
+                                className="checkbox checkbox-secondary  w-4 h-4 "
+                              />
+                              <span className="label-text text-lg">
+                                {c.name}
+                              </span>
+                            </label>
+                          </li>
+                        ))}
+                      </>
+                    ) : (
+                      <div className="flex flex-col gap-4 px-2 ">
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                        <div className="skeleton h-4 w-full"></div>
+                      </div>
+                    )}
                   </>
                 ) : (
                   <>
@@ -233,7 +251,9 @@ const Page = () => {
             {categoryId.length == 0 ? (
               <>
                 {allproducts?.length ? (
-                  allproducts.map((product) => <ProductBox {...product} key={product._id} />)
+                  allproducts.map((product) => (
+                    <ProductBox {...product} key={product._id} />
+                  ))
                 ) : (
                   <>
                     <div className="flex flex-col gap-4 w-52">
@@ -254,7 +274,9 @@ const Page = () => {
             ) : (
               <>
                 {categProduct?.length ? (
-                  categProduct.map((product) => <ProductBox {...product} key={product._id} />)
+                  categProduct.map((product) => (
+                    <ProductBox {...product} key={product._id} />
+                  ))
                 ) : (
                   <>
                     <h1 className="text-xl font-semibold">
