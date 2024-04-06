@@ -7,7 +7,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 // 65b1f9f65d69bff40e645206
 export default function Home() {
-  
   const [nProducts, setNProducts] = useState([]);
   const [featuredProd, setFeaturedProd] = useState(null);
   useEffect(() => {
@@ -16,7 +15,7 @@ export default function Home() {
         setFeaturedProd(response.data);
       });
     };
-    
+
     const getNproducts = async () => {
       await axios.get("/api/newProducts").then((response) => {
         setNProducts(response.data);
@@ -25,12 +24,15 @@ export default function Home() {
 
     getfeaturedProd();
     getNproducts();
+    // setHydrated(true);
   }, []);
   return (
     <>
       {/* <Header /> */}
+
       <Featured featuredProd={featuredProd} />
       <Newproduct nProducts={nProducts} />
+
       {/* <Footer/> */}
     </>
   );
